@@ -13,7 +13,7 @@ import Markdown from "react-markdown";
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const App = () => {   
-  const [code, setCode] = useState("describe your code or paste it...");   
+  const [code, setCode] = useState("");   
   const [review, setReview] = useState("");    
 
   useEffect(() => {     
@@ -47,7 +47,8 @@ const App = () => {
           
           <div className="flex-1 relative">
             <Editor           
-              value={code}           
+              value={code}     
+              placeholder="describe your code or paste it..."      
               onValueChange={(code) => setCode(code)}           
               highlight={(code) => highlight(code, prism.languages.javascript)}           
               padding={20}           
