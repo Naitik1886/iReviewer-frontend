@@ -21,7 +21,7 @@ const App = () => {
   const handleReview = async () => {     
     try {       
       const response = await axios.post(`${API_BASE_URL}/ai/response`, {         
-        code,       
+       code:data,       
       }); 
       setReview(response.data?.response || JSON.stringify(response.data));    
     } catch (err) {       
