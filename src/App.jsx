@@ -11,7 +11,7 @@ import Markdown from "react-markdown";
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const App = () => {   
-  const [data, setData] = useState("");   
+  const [code, setCode] = useState("");   
   const [review, setReview] = useState("");    
 
   useEffect(() => {     
@@ -21,7 +21,7 @@ const App = () => {
   const handleReview = async () => {     
     try {       
       const response = await axios.post(`${API_BASE_URL}/ai/response`, {         
-       code:data,       
+       code,       
       }); 
       setReview(response.data?.response || JSON.stringify(response.data));    
     } catch (err) {       
@@ -45,9 +45,9 @@ const App = () => {
           
           <div className="flex-1 relative">
             <Editor           
-              value={data}     
+              value={code}     
               placeholder="describe your code or paste it..."      
-              onValueChange={(code) => setData(code)}           
+              onValueChange={(code) => setCode(code)}           
               highlight={(code) => highlight(code, prism.languages.javascript)}           
               padding={20}           
               className="bg-slate-950/80 rounded-2xl border border-slate-700/50 shadow-2xl backdrop-blur-sm h-full"           
@@ -95,3 +95,10 @@ const App = () => {
 };  
 
 export default App;
+
+
+
+// the field name in the backend like const {code}
+// =req.body;, code is the field name and it should
+// match with the field name send by axios to
+// backend 
