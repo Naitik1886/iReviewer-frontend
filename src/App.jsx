@@ -21,7 +21,7 @@ const App = () => {
   const handleReview = async () => {     
     try {       
       const response = await axios.post(`${API_BASE_URL}/ai/response`, {         
-        data,       
+        code,       
       }); 
       setReview(response.data?.response || JSON.stringify(response.data));    
     } catch (err) {       
@@ -45,10 +45,10 @@ const App = () => {
           
           <div className="flex-1 relative">
             <Editor           
-              value={data}     
+              value={code}     
               placeholder="describe your code or paste it..."      
-              onValueChange={(data) => setData(data)}           
-              highlight={(data) => highlight(data, prism.languages.javascript)}           
+              onValueChange={(code) => setData(code)}           
+              highlight={(code) => highlight(code, prism.languages.javascript)}           
               padding={20}           
               className="bg-slate-950/80 rounded-2xl border border-slate-700/50 shadow-2xl backdrop-blur-sm h-full"           
               style={{             
