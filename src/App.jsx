@@ -11,7 +11,7 @@ import Markdown from "react-markdown";
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const App = () => {   
-  const [code, setCode] = useState("");   
+  const [data, setData] = useState("");   
   const [review, setReview] = useState("");    
 
   useEffect(() => {     
@@ -47,8 +47,8 @@ const App = () => {
             <Editor           
               value={code}     
               placeholder="describe your code or paste it..."      
-              onValueChange={(code) => setCode(code)}           
-              highlight={(code) => highlight(code, prism.languages.javascript)}           
+              onValueChange={(data) => setData(data)}           
+              highlight={(data) => highlight(data, prism.languages.javascript)}           
               padding={20}           
               className="bg-slate-950/80 rounded-2xl border border-slate-700/50 shadow-2xl backdrop-blur-sm h-full"           
               style={{             
