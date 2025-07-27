@@ -45,7 +45,7 @@ const App = () => {
           
           <div className="flex-1 relative">
             <Editor           
-              value={code}     
+              value={data}     
               placeholder="describe your code or paste it..."      
               onValueChange={(data) => setData(data)}           
               highlight={(data) => highlight(data, prism.languages.javascript)}           
