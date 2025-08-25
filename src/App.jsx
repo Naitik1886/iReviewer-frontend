@@ -71,7 +71,10 @@ const App = () => {
               onClick={handleReview}           
               className="group relative px-6 md:px-8 py-3 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 border border-purple-500/30"         
             >           
-            {isLoading ? (<Loader2 className="w-4 h-4 animate-spin" />):( <span className="relative z-10">Review Code</span>) }
+            {isLoading ? ( <span className="relative z-10 flex items-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Reviewing...
+                </span>):( <span className="relative z-10">Review Code</span>) }
              
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-300"></div>
             </button>
@@ -88,12 +91,16 @@ const App = () => {
           </div>
           
           <div className="flex-1">
-            <div className="border border-slate-700/50 bg-slate-950/60 backdrop-blur-sm rounded-2xl shadow-2xl text-slate-200 p-4 md:p-6 h-full overflow-auto whitespace-pre-wrap">           
-<div className="prose prose-invert prose-slate max-w-none prose-headings:text-purple-300 prose-code:text-green-400 prose-pre:bg-slate-900/80 prose-pre:border prose-pre:border-slate-700/50 prose-blockquote:border-l-purple-500 prose-blockquote:bg-purple-950/20">
+            <div className="border border-slate-700/50 bg-slate-950/60 backdrop-blur-sm rounded-2xl shadow-2xl text-slate-200 p-4 md:p-6 h-full overflow-auto whitespace-pre-wrap">   
+            {isLoading ? (<div className="flex flex-col items-center justify-center h-full">
+                  <Loader2 className="w-8 h-8 animate-spin text-purple-400 mb-4" />
+                  <p className="text-slate-400">Analyzing your code...</p>
+                </div>):(<div className="prose prose-invert prose-slate max-w-none prose-headings:text-purple-300 prose-code:text-green-400 prose-pre:bg-slate-900/80 prose-pre:border prose-pre:border-slate-700/50 prose-blockquote:border-l-purple-500 prose-blockquote:bg-purple-950/20">
   <Markdown rehypePlugins={[rehypeHighlight]}>
     {review}
   </Markdown>
-</div>            </div>
+</div>  )}        
+          </div>
           </div>
         </div>
       </div>     
