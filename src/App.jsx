@@ -1,5 +1,6 @@
 import React, { useState } from "react"; 
 import { highlight, languages } from "prismjs/components/prism-core"; 
+import {Loader, Loader2} from "lucide-react"
 import prism from "prismjs"; 
 // import 'prismjs/themes/prism-tommorrow.css'; 
 import Editor from "react-simple-code-editor"; 
@@ -12,22 +13,26 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const App = () => {   
   const [code, setCode] = useState("");   
-  const [review, setReview] = useState("");    
+  const [review, setReview] = useState("");   
+  const [isLoading , setIsLoading] = useState(false) 
 
   useEffect(() => {     
     prism.highlightAll();   
   }, []);    
 
-  const handleReview = async () => {     
+  const handleReview = async () => {  
+    setIsLoading(true)   
     try {       
       const response = await axios.post(`${API_BASE_URL}/ai/response`, {         
         code,       
       }); 
+      setIsLoading(false)
       setReview(response.data?.response || JSON.stringify(response.data));    
     } catch (err) {       
       console.error("Run failed:", err.message);     
     }   
   };    
+
 
   return (     
     <div className="flex flex-col md:flex-row h-screen w-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">       
@@ -61,11 +66,13 @@ const App = () => {
           </div>
           
           <div className="mt-6 flex justify-center">
+
             <button           
               onClick={handleReview}           
               className="group relative px-6 md:px-8 py-3 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 border border-purple-500/30"         
             >           
-              <span className="relative z-10">Review Code</span>
+            {isLoading ? (<Loader2 className="w-4 h-4 animate-spin" />):( <span className="relative z-10">Review Code</span>) }
+             
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-300"></div>
             </button>
           </div>
